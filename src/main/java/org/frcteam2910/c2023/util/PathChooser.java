@@ -934,8 +934,8 @@ public class PathChooser {
         double xError = Math.abs(desiredX - driveX);
         double yError = Math.abs(desiredY - driveY);
 
-        Logger.getInstance().recordOutput("DesiredPose", desiredPose);
-        Logger.getInstance().recordOutput("IsUnderError", xError < EJECTION_DISTANCE && yError < EJECTION_DISTANCE);
+        Logger.recordOutput("DesiredPose", desiredPose);
+        Logger.recordOutput("IsUnderError", xError < EJECTION_DISTANCE && yError < EJECTION_DISTANCE);
         return xError < EJECTION_DISTANCE && yError < EJECTION_DISTANCE;
     }
 

@@ -81,7 +81,7 @@ public class ArmSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         io.updateInputs(armInputs);
-        Logger.getInstance().processInputs("Arm", armInputs);
+        Logger.processInputs("Arm", armInputs);
 
         if (Robot.isSimulation() || zeroed) {
             if (targetPose != null) {
@@ -89,17 +89,17 @@ public class ArmSubsystem extends SubsystemBase {
                 double extensionTargetLength = targetPose.getExtensionLengthMeters();
                 double wristTargetAngle = targetPose.getWristAngleRad();
 
-                Logger.getInstance().recordOutput("Arm/PreProcessedShoulderTargetAngle", shoulderTargetAngle);
-                Logger.getInstance().recordOutput("Arm/PreProcessedExtensionTargetLength", extensionTargetLength);
-                Logger.getInstance().recordOutput("Arm/PreProcessedWristTargetAngle", wristTargetAngle);
+                Logger.recordOutput("Arm/PreProcessedShoulderTargetAngle", shoulderTargetAngle);
+                Logger.recordOutput("Arm/PreProcessedExtensionTargetLength", extensionTargetLength);
+                Logger.recordOutput("Arm/PreProcessedWristTargetAngle", wristTargetAngle);
 
                 boolean notWithinThreshold = Math.abs(armInputs.shoulderAngleRad - shoulderTargetAngle)
                         > (DriverStation.isTeleop()
                                 ? EXTENSION_FAST_ANGLE_THRESHOLD
                                 : EXTENSION_SLOW_FAST_ANGLE_THRESHOLD);
 
-                Logger.getInstance().recordOutput("Arm/NotWithinShoulderThreshold", notWithinThreshold);
-                Logger.getInstance()
+                Logger.recordOutput("Arm/NotWithinShoulderThreshold", notWithinThreshold);
+                Logger
                         .recordOutput("Arm/ShoulderDelta", Math.abs(armInputs.shoulderAngleRad - shoulderTargetAngle));
                 if (notWithinThreshold) {
                     extensionTargetLength = MIN_EXTENSION_LENGTH;
@@ -182,11 +182,11 @@ public class ArmSubsystem extends SubsystemBase {
                 targetArm.setLength(extensionTargetLength);
                 targetWrist.setAngle(Units.radiansToDegrees(wristTargetAngle));
 
-                Logger.getInstance().recordOutput("Arm/TargetInDanger", targetInDanger);
-                Logger.getInstance().recordOutput("Arm/CurrentInDanger", currentInDanger);
-                Logger.getInstance().recordOutput("Arm/ShoulderTargetAngle", shoulderTargetAngle);
-                Logger.getInstance().recordOutput("Arm/ExtensionTargetLength", extensionTargetLength);
-                Logger.getInstance().recordOutput("Arm/WristTargetAngle", wristTargetAngle);
+                Logger.recordOutput("Arm/TargetInDanger", targetInDanger);
+                Logger.recordOutput("Arm/CurrentInDanger", currentInDanger);
+                Logger.recordOutput("Arm/ShoulderTargetAngle", shoulderTargetAngle);
+                Logger.recordOutput("Arm/ExtensionTargetLength", extensionTargetLength);
+                Logger.recordOutput("Arm/WristTargetAngle", wristTargetAngle);
 
             } else {
                 io.setWristVoltage(0);
@@ -199,8 +199,8 @@ public class ArmSubsystem extends SubsystemBase {
         currentArm.setLength(armInputs.extensionPositionMeters);
         currentWrist.setAngle(Units.radiansToDegrees(armInputs.wristAngleRad));
 
-        Logger.getInstance().recordOutput("Arm/Current Pose", currentPose);
-        Logger.getInstance().recordOutput("Arm/Mechanism", targetMech);
+        Logger.recordOutput("Arm/Current Pose", currentPose);
+        Logger.recordOutput("Arm/Mechanism", targetMech);
     }
 
     public void setTargetPose(ArmPositions armPositions) {
@@ -244,10 +244,10 @@ public class ArmSubsystem extends SubsystemBase {
                 new Rotation3d(
                         0, Units.degreesToRadians(currentPose.getRotation().getDegrees() + 90), 0));
 
-        Logger.getInstance().recordOutput("Arm/Arm Phase One", phaseOne);
-        Logger.getInstance().recordOutput("Arm/Arm Phase Two", phaseTwo);
-        Logger.getInstance().recordOutput("Arm/Arm Phase Three", phaseThree);
-        Logger.getInstance().recordOutput("Arm/Wrist Pose3d", wrist);
+        Logger.recordOutput("Arm/Arm Phase One", phaseOne);
+        Logger.recordOutput("Arm/Arm Phase Two", phaseTwo);
+        Logger.recordOutput("Arm/Arm Phase Three", phaseThree);
+        Logger.recordOutput("Arm/Wrist Pose3d", wrist);
     }
 
     /**

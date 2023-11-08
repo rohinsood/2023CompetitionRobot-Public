@@ -28,52 +28,50 @@ public class Robot extends LoggedRobot {
 
     @Override
     public void robotInit() {
-        Logger logger = Logger.getInstance();
-
         // Record metadata
-        logger.recordMetadata("GitRevision", String.valueOf(BuildInfo.GIT_REVISION));
-        logger.recordMetadata("GitSHA", BuildInfo.GIT_SHA);
-        logger.recordMetadata("GitDate", BuildInfo.GIT_DATE);
-        logger.recordMetadata("GitBranch", BuildInfo.GIT_BRANCH);
-        logger.recordMetadata("BuildDate", BuildInfo.BUILD_DATE);
-        logger.recordMetadata("BuildUnixTime", String.valueOf(BuildInfo.BUILD_UNIX_TIME));
+        Logger.recordMetadata("GitRevision", String.valueOf(BuildInfo.GIT_REVISION));
+        Logger.recordMetadata("GitSHA", BuildInfo.GIT_SHA);
+        Logger.recordMetadata("GitDate", BuildInfo.GIT_DATE);
+        Logger.recordMetadata("GitBranch", BuildInfo.GIT_BRANCH);
+        Logger.recordMetadata("BuildDate", BuildInfo.BUILD_DATE);
+        Logger.recordMetadata("BuildUnixTime", String.valueOf(BuildInfo.BUILD_UNIX_TIME));
         switch (BuildInfo.DIRTY) {
             case 0:
-                logger.recordMetadata("GitDirty", "Clean");
+                Logger.recordMetadata("GitDirty", "Clean");
                 break;
             case 1:
-                logger.recordMetadata("GitDirty", "Dirty");
+                Logger.recordMetadata("GitDirty", "Dirty");
                 break;
             default:
-                logger.recordMetadata("GitDirty", "Error");
+                Logger.recordMetadata("GitDirty", "Error");
                 break;
         }
-        logger.recordMetadata("Robot Name", RobotIdentity.getIdentity().toString());
-        logger.recordMetadata("Robot MAC Address", MacAddressUtil.getMACAddress());
+        Logger.recordMetadata("Robot Name", RobotIdentity.getIdentity().toString());
+        Logger.recordMetadata("Robot MAC Address", MacAddressUtil.getMACAddress());
 
         // Set up data receivers & replay sources
         switch (RobotConfiguration.getMode()) {
                 // Running on a real robot, log to a USB stick
             case REAL:
-                logger.addDataReceiver(new WPILOGWriter("/media/sda1/"));
-                logger.addDataReceiver(new NT4Publisher());
+                Logger.addDataReceiver(new WPILOGWriter("/media/sda1/"));
+                Logger.addDataReceiver(new NT4Publisher());
                 break;
 
                 // Running a physics simulator, log to NetworkTables
             case SIM:
-                logger.addDataReceiver(new NT4Publisher());
+                Logger.addDataReceiver(new NT4Publisher());
                 break;
 
                 // Replaying a log, set up replay source
             case REPLAY:
                 setUseTiming(false); // Run as fast as possible
                 String logPath = LogFileUtil.findReplayLog();
-                logger.setReplaySource(new WPILOGReader(logPath));
-                logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_sim")));
+                Logger.setReplaySource(new WPILOGReader(logPath));
+                Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_sim")));
         }
 
         // Start AdvantageKit logger
-        logger.start();
+        Logger.start();
 
         robotContainer = new RobotContainer();
     }
@@ -87,23 +85,23 @@ public class Robot extends LoggedRobot {
         CommandScheduler.getInstance().run();
         double end = System.currentTimeMillis();
         double commandSchedulerTime = end - start;
-        Logger.getInstance().recordOutput("Times/CommandSchedulerMs", commandSchedulerTime);
-        Logger.getInstance().recordOutput("Times/CommandSchedulerMsAverage", average.calculate(commandSchedulerTime));
+        Logger.recordOutput("Times/CommandSchedulerMs", commandSchedulerTime);
+        Logger.recordOutput("Times/CommandSchedulerMsAverage", average.calculate(commandSchedulerTime));
 
         start = System.currentTimeMillis();
         robotContainer.getOperatorDashboard().update();
         end = System.currentTimeMillis();
-        Logger.getInstance().recordOutput("Times/OperatorDashboardMs", end - start);
+        Logger.recordOutput("Times/OperatorDashboardMs", end - start);
 
         start = System.currentTimeMillis();
         robotContainer.getSuperstructure().update();
         end = System.currentTimeMillis();
-        Logger.getInstance().recordOutput("Times/SuperstructureMs", end - start);
+        Logger.recordOutput("Times/SuperstructureMs", end - start);
 
         start = System.currentTimeMillis();
         FieldConstants.update();
         end = System.currentTimeMillis();
-        Logger.getInstance().recordOutput("Times/FieldConstantsMs", end - start);
+        Logger.recordOutput("Times/FieldConstantsMs", end - start);
     }
 
     @Override

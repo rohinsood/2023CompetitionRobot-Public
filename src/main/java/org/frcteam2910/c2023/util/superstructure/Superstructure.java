@@ -12,7 +12,7 @@ public class Superstructure {
 
     public void update() {
         io.updateInputs(superstructureInputs);
-        Logger.getInstance().processInputs("Superstructure", superstructureInputs);
+        Logger.processInputs("Superstructure", superstructureInputs);
     }
 
     public boolean getHomeButtonPressed() {

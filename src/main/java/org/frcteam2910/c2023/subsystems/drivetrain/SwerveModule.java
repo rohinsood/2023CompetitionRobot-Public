@@ -106,7 +106,7 @@ public class SwerveModule {
         }
 
         io.updateInputs(inputs);
-        Logger.getInstance().processInputs("Drive/" + name + "Module", inputs);
+        Logger.processInputs("Drive/" + name + "Module", inputs);
     }
 
     public BaseStatusSignalValue[] getSignals() {

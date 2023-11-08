@@ -91,7 +91,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final PIDController rotationController = new PIDController(1.5, 0, 0);
 
     private final PPHolonomicDriveController swerveFollower =
-            new PPHolonomicDriveController(xController, yController, rotationController);
+            new PPHolonomicDriveCon`troller(xController, yController, rotationController);
 
     private boolean shouldUseVisionData = true;
     private boolean goodToEject = false;
@@ -246,7 +246,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        Logger.getInstance()
+        Logger
                 .processInputs("Drive/Gyro", gyroInputs); // Logging the gyro scope readings. Goes to AdvantageScope
 
         SwerveModuleState[] optimizedSwerveModuleStates = new SwerveModuleState[4];
@@ -276,19 +276,19 @@ public class DrivetrainSubsystem extends SubsystemBase {
             }
         }
 
-        Logger.getInstance().recordOutput("Drive/Angle", getPose().getRotation().getRadians());
-        Logger.getInstance().recordOutput("Drive/ModuleStates", swerveModuleStates);
-        Logger.getInstance().recordOutput("Drive/TargetChassisVelocity", new double[] {
+        Logger.recordOutput("Drive/Angle", getPose().getRotation().getRadians());
+        Logger.recordOutput("Drive/ModuleStates", swerveModuleStates);
+        Logger.recordOutput("Drive/TargetChassisVelocity", new double[] {
             targetVelocity.vxMetersPerSecond, targetVelocity.vyMetersPerSecond, targetVelocity.omegaRadiansPerSecond
         });
-        Logger.getInstance().recordOutput("Drive/ModuleStates", swerveModuleStates); // Logging each module state
-        Logger.getInstance()
+        Logger.recordOutput("Drive/ModuleStates", swerveModuleStates); // Logging each module state
+        Logger
                 .recordOutput(
                         "Drive/OptimizedModuleStates",
                         optimizedSwerveModuleStates); // Logging each optimized module state
         // Figures out the current location and rotation of the robot on the field.
 
-        Logger.getInstance().recordOutput("Drive/UsingVision?", shouldUseVisionData);
+        Logger.recordOutput("Drive/UsingVision?", shouldUseVisionData);
         if (shouldUseVisionData) {
             synchronized (estimator) {
                 for (int i = 0; i < vision.getVisionOdometry().size(); i++) {
@@ -304,14 +304,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
         }
 
         vision.setReferencePose(getPose());
-        Logger.getInstance().recordOutput("Drive/Pose", getPose()); // Logging the pose data
+        Logger.recordOutput("Drive/Pose", getPose()); // Logging the pose data
         synchronized (estimator) {
-            Logger.getInstance().recordOutput("Drive/EstimatedPose", estimator.getEstimatedPosition());
+            Logger.recordOutput("Drive/EstimatedPose", estimator.getEstimatedPosition());
         }
         synchronized (odometry) {
-            Logger.getInstance().recordOutput("Drive/OdometryPose", odometry.getPoseMeters());
+            Logger.recordOutput("Drive/OdometryPose", odometry.getPoseMeters());
         }
-        Logger.getInstance().recordOutput("Drive/OdometryThreadLoop", odometryUpdateThread.getTime());
+        Logger.recordOutput("Drive/OdometryThreadLoop", odometryUpdateThread.getTime());
     }
 
     /**

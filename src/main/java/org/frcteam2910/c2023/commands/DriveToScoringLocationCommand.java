@@ -186,13 +186,12 @@ public class DriveToScoringLocationCommand extends CommandBase {
 
             waypoint = WaypointConstants.getClosestNode(initialPosition, operatorDashboard, intakeSubsystem);
 
-            Logger.getInstance().recordOutput("AutoScoreSupplier", autoScoreSupplier.getAsBoolean());
+            Logger.recordOutput("AutoScoreSupplier", autoScoreSupplier.getAsBoolean());
 
             if (!rightTriggerHeld.getAsBoolean() && !autoScoreSupplier.getAsBoolean() && notStartedPlacement) {
                 desiredPose = WaypointConstants.getPoseByWaypoint(waypoint);
 
-                Logger.getInstance()
-                        .recordOutput(
+                Logger.recordOutput(
                                 "Drive/TargetPose",
                                 new Pose2d(desiredPose.getX(), desiredPose.getY(), targetAngle.get()));
 
@@ -205,7 +204,7 @@ public class DriveToScoringLocationCommand extends CommandBase {
                                 - Units.inchesToMeters(operatorDashboard.getTranslationOffset()),
                         desiredPose.getRotation());
 
-                Logger.getInstance()
+                Logger
                         .recordOutput(
                                 "Drive/TargetPose with ToF",
                                 new Pose2d(desiredPose.getX(), desiredPose.getY(), targetAngle.get()));
@@ -224,8 +223,8 @@ public class DriveToScoringLocationCommand extends CommandBase {
             }
 
             //            visionSubsystem.setUseSingleTag(true, WaypointConstants.getClosestTagByWaypoint(waypoint));
-            Logger.getInstance().recordOutput("Vision/ClosestTag", WaypointConstants.getClosestTagByWaypoint(waypoint));
-            Logger.getInstance().recordOutput("Drive/isAllowablePosition", isAllowablePosition());
+            Logger.recordOutput("Vision/ClosestTag", WaypointConstants.getClosestTagByWaypoint(waypoint));
+            Logger.recordOutput("Drive/isAllowablePosition", isAllowablePosition());
 
             if (shouldResetAccumulator()) {
                 yController.reset();
@@ -251,7 +250,7 @@ public class DriveToScoringLocationCommand extends CommandBase {
                 }
             }
             if (desiredPose != null) {
-                Logger.getInstance()
+                Logger
                         .recordOutput(
                                 "DistanceFromAutoAlign",
                                 drivetrainSubsystem
@@ -296,8 +295,8 @@ public class DriveToScoringLocationCommand extends CommandBase {
 
         //        rotationalVelocity += Math.copySign(ANGULAR_STATIC_FRICTION_CONSTANT, rotationalVelocity);
 
-        Logger.getInstance().recordOutput("Drive/TargetAngle", targetAngle.get().getRadians());
-        Logger.getInstance().recordOutput("Auto Align/yVelocity", yVelocity);
+        Logger.recordOutput("Drive/TargetAngle", targetAngle.get().getRadians());
+        Logger.recordOutput("Auto Align/yVelocity", yVelocity);
 
         drivetrainSubsystem.setTargetVelocity(ChassisSpeeds.fromFieldRelativeSpeeds(
                 xVelocity,
@@ -348,17 +347,17 @@ public class DriveToScoringLocationCommand extends CommandBase {
                         - MathUtil.angleModulus(desiredAngle));
         double pitchError = Math.abs(MathUtil.angleModulus(drivetrainPitch) - MathUtil.angleModulus(desiredPitch));
 
-        Logger.getInstance().recordOutput("Auto Align/Angle error", angleError);
-        Logger.getInstance().recordOutput("Auto Align/Y error", yError);
-        Logger.getInstance().recordOutput("Auto Align/X error", xError);
+        Logger.recordOutput("Auto Align/Angle error", angleError);
+        Logger.recordOutput("Auto Align/Y error", yError);
+        Logger.recordOutput("Auto Align/X error", xError);
 
-        Logger.getInstance()
+        Logger
                 .recordOutput(
                         "Auto Align/X allowable",
                         xError < ALLOWABLE_POSITIVE_X_POSE_ERROR && xError > ALLOWABLE_NEGATIVE_X_POSE_ERROR);
-        Logger.getInstance().recordOutput("Auto Align/Y allowable", yError <= ALLOWABLE_Y_POSE_ERROR);
-        Logger.getInstance().recordOutput("Auto Align/Angle allowable", angleError <= ALLOWABLE_ANGLE_ERROR);
-        Logger.getInstance().recordOutput("Auto Align/Pitch allowable", pitchError <= ALLOWABLE_PITCH_ERROR);
+        Logger.recordOutput("Auto Align/Y allowable", yError <= ALLOWABLE_Y_POSE_ERROR);
+        Logger.recordOutput("Auto Align/Angle allowable", angleError <= ALLOWABLE_ANGLE_ERROR);
+        Logger.recordOutput("Auto Align/Pitch allowable", pitchError <= ALLOWABLE_PITCH_ERROR);
 
         if (withX) {
             return autoEjectDebouncer.calculate(

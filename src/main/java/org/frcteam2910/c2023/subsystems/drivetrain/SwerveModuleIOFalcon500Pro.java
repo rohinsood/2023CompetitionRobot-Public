@@ -282,7 +282,7 @@ public class SwerveModuleIOFalcon500Pro implements SwerveModuleIO {
         primaryDriveMotor.setControl(
                 voltageControl.withOutput((targetDriveVelocityMetersPerSec / getMaxVelocity()) * 12));
 
-        Logger.getInstance().recordOutput("Voltage", (targetDriveVelocityMetersPerSec / getMaxVelocity()) * 12);
+        Logger.recordOutput("Voltage", (targetDriveVelocityMetersPerSec / getMaxVelocity()) * 12);
 
         this.targetVelocityMetersPerSeconds = targetDriveVelocityMetersPerSec;
     }

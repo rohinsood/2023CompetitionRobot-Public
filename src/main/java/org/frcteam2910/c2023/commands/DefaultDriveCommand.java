@@ -65,7 +65,7 @@ public class DefaultDriveCommand extends CommandBase {
         angularVelocity =
                 angularVelocitySupplier.getAsDouble() * (joystickButton.getAsBoolean() ? 1.0 : ROTATION_COEFFICIENT);
 
-        Logger.getInstance()
+        Logger
                 .recordOutput("Drive/Rotation offset", drivetrain.getAngularVelocity() * ANGULAR_VELOCITY_COEFFICIENT);
 
         // Creating a new Chassis speed.

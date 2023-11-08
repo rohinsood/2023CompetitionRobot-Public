@@ -48,7 +48,7 @@ public class AutoBalanceOnChargeStationCommand extends CommandBase {
         Rotation2d approximateAngle = new Rotation2d();
         //        int multiplesOfNinetyInAngle = (int) Math.round(currentAngle / Math.toRadians(90));
         //        int approximateAngle = 90 * multiplesOfNinetyInAngle;
-        // Logger.getInstance().recordOutput("Drive/Approximate angle", approximateAngle);
+        // Logger.recordOutput("Drive/Approximate angle", approximateAngle);
 
         //        switch (approximateAngle) {
         //            case 0:
@@ -82,7 +82,7 @@ public class AutoBalanceOnChargeStationCommand extends CommandBase {
             approximateAngle = Rotation2d.fromDegrees(270);
             driveUpTheChargeStation(false, 1);
         }
-        Logger.getInstance().recordOutput("Drive/Appx Angle", approximateAngle.getDegrees());
+        Logger.recordOutput("Drive/Appx Angle", approximateAngle.getDegrees());
     }
 
     @Override

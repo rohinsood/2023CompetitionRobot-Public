@@ -122,8 +122,8 @@ public class SnapToAngleCommand extends CommandBase {
                         .getRotation()
                         .plus(new Rotation2d(
                                 drivetrain.getAngularVelocity() * DefaultDriveCommand.ANGULAR_VELOCITY_COEFFICIENT))));
-        Logger.getInstance().recordOutput("SnapAnglePIDOutput", rotationalVelocity);
-        Logger.getInstance().recordOutput("Drive/TargetAngle", targetAngle.get().getRadians());
+        Logger.recordOutput("SnapAnglePIDOutput", rotationalVelocity);
+        Logger.recordOutput("Drive/TargetAngle", targetAngle.get().getRadians());
     }
 
     @Override

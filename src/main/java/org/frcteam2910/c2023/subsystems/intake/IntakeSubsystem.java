@@ -49,13 +49,13 @@ public class IntakeSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         io.updateInputs(intakeInputs);
-        Logger.getInstance().processInputs("Intake", intakeInputs);
-        Logger.getInstance().recordOutput("Intake/Beam Break", hasGamePiece());
-        Logger.getInstance().recordOutput("Intake/Target State", targetState.name());
-        Logger.getInstance().recordOutput("Intake/Current State", currentState.name());
-        Logger.getInstance().recordOutput("Intake/Has Piece (Velocity)", hasGamePiece());
-        Logger.getInstance().recordOutput("Intake/Current Draw Piece", getCurrentDrawHasPiece());
-        Logger.getInstance().recordOutput("Intake/Cone Offset", getConeOffset().getY());
+        Logger.processInputs("Intake", intakeInputs);
+        Logger.recordOutput("Intake/Beam Break", hasGamePiece());
+        Logger.recordOutput("Intake/Target State", targetState.name());
+        Logger.recordOutput("Intake/Current State", currentState.name());
+        Logger.recordOutput("Intake/Has Piece (Velocity)", hasGamePiece());
+        Logger.recordOutput("Intake/Current Draw Piece", getCurrentDrawHasPiece());
+        Logger.recordOutput("Intake/Cone Offset", getConeOffset().getY());
 
         // setTargetPiece(operatorDashboard.getSelectedGamePiece());
 
@@ -65,8 +65,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
         io.setMotorVoltage(intakeVoltage);
 
-        Logger.getInstance().recordOutput("Target Piece", targetPiece.toString());
-        Logger.getInstance()
+        Logger.recordOutput("Target Piece", targetPiece.toString());
+        Logger
                 .recordOutput(
                         "Target Level", operatorDashboard.getSelectedGridLevel().name());
     }

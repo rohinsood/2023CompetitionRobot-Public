@@ -49,7 +49,7 @@ public class FollowPathCommand extends CommandBase {
         // Reset and begin timer
         this.timer.reset();
         this.timer.start();
-        // Logger.getInstance().recordOutput("Drivetrain/Trajectory", trajectory);
+        // Logger.recordOutput("Drivetrain/Trajectory", trajectory);
         // Get initial state of path
         previousState = trajectory.getInitialState();
     }
@@ -79,7 +79,7 @@ public class FollowPathCommand extends CommandBase {
                 desiredState.accelerationMetersPerSecondSq * heading.getSin() * ACCELERATION_COEFFICIENT;
 
         drivetrainSubsystem.setTargetVelocity(chassisSpeeds);
-        Logger.getInstance()
+        Logger
                 .recordOutput(
                         "Desired Auto Pose",
                         new Pose2d(desiredState.poseMeters.getTranslation(), desiredState.holonomicRotation));

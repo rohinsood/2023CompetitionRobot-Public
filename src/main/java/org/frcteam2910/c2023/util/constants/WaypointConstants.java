@@ -118,15 +118,15 @@ public class WaypointConstants {
             WaypointConstants.columnNineWaypoint.toPose2d()
         };
 
-        Logger.getInstance().recordOutput("FieldConstants/field column 1", FieldConstants.COLUMN_ONE[0]);
-        Logger.getInstance().recordOutput("FieldConstants/field column 2", FieldConstants.COLUMN_TWO[0]);
-        Logger.getInstance().recordOutput("FieldConstants/field column 3", FieldConstants.COLUMN_THREE[0]);
-        Logger.getInstance().recordOutput("FieldConstants/field column 4", FieldConstants.COLUMN_FOUR[0]);
-        Logger.getInstance().recordOutput("FieldConstants/field column 5", FieldConstants.COLUMN_FIVE[0]);
-        Logger.getInstance().recordOutput("FieldConstants/field column 6", FieldConstants.COLUMN_SIX[0]);
-        Logger.getInstance().recordOutput("FieldConstants/field column 7", FieldConstants.COLUMN_SEVEN[0]);
-        Logger.getInstance().recordOutput("FieldConstants/field column 8", FieldConstants.COLUMN_EIGHT[0]);
-        Logger.getInstance().recordOutput("FieldConstants/field column 9", FieldConstants.COLUMN_NINE[0]);
+        Logger.recordOutput("FieldConstants/field column 1", FieldConstants.COLUMN_ONE[0]);
+        Logger.recordOutput("FieldConstants/field column 2", FieldConstants.COLUMN_TWO[0]);
+        Logger.recordOutput("FieldConstants/field column 3", FieldConstants.COLUMN_THREE[0]);
+        Logger.recordOutput("FieldConstants/field column 4", FieldConstants.COLUMN_FOUR[0]);
+        Logger.recordOutput("FieldConstants/field column 5", FieldConstants.COLUMN_FIVE[0]);
+        Logger.recordOutput("FieldConstants/field column 6", FieldConstants.COLUMN_SIX[0]);
+        Logger.recordOutput("FieldConstants/field column 7", FieldConstants.COLUMN_SEVEN[0]);
+        Logger.recordOutput("FieldConstants/field column 8", FieldConstants.COLUMN_EIGHT[0]);
+        Logger.recordOutput("FieldConstants/field column 9", FieldConstants.COLUMN_NINE[0]);
     }
 
     public static int getClosestNode(Pose2d currentPose, OperatorDashboard dashboard, IntakeSubsystem intakeSubsystem) {
@@ -141,7 +141,7 @@ public class WaypointConstants {
                         : 0.0)
                 + Units.inchesToMeters(dashboard.getTranslationOffset());
 
-        Logger.getInstance()
+        Logger
                 .recordOutput(
                         "Auto Align/currentY in getClosestNode()",
                         new Pose2d(currentPose.getX(), currentY, currentPose.getRotation()));

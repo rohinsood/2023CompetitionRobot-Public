@@ -37,7 +37,7 @@ public class VisionSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        Logger.getInstance().recordOutput("useSingleTag", useSingleTag);
+        Logger.recordOutput("useSingleTag", useSingleTag);
 
         // clear results from last periodic
         results.clear();
@@ -45,7 +45,7 @@ public class VisionSubsystem extends SubsystemBase {
         for (int i = 0; i < inputs.length; i++) {
             // update and process new inputs
             cameras[i].updateInputs(inputs[i]);
-            Logger.getInstance().processInputs("Vision/" + cameras[i].getName() + "/Inputs", inputs[i]);
+            Logger.processInputs("Vision/" + cameras[i].getName() + "/Inputs", inputs[i]);
 
             if (inputs[i].hasTarget
                     && inputs[i].isNew
@@ -61,14 +61,14 @@ public class VisionSubsystem extends SubsystemBase {
             }
         }
 
-        Logger.getInstance().recordOutput("Vision/ResultCount", results.size());
+        Logger.recordOutput("Vision/ResultCount", results.size());
     }
 
     public void processVision(int cameraNum) {
         // create a new pose based off the new inputs
         Pose2d currentPose =
                 new Pose2d(inputs[cameraNum].x, inputs[cameraNum].y, new Rotation2d(inputs[cameraNum].rotation));
-        Logger.getInstance().recordOutput(cameras[cameraNum].getName() + " pose", currentPose);
+        Logger.recordOutput(cameras[cameraNum].getName() + " pose", currentPose);
 
         // add the new pose to a list
         results.add(new PoseAndTimestamp(currentPose, inputs[cameraNum].timestamp));
